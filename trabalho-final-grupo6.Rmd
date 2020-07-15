@@ -7,6 +7,8 @@ output: github_document
 A base de dados escolhida para o trabalho, disponível nesse [link](http://www.transparencia.dadosabertos.mg.gov.br/dataset/compras-contratos-do-estado-de-minas-gerais), apresenta os dados de compras e aquisições de materiais, bens e serviços pelo Estado de Minas Gerais.
 
 Perguntas:
+1) Quais foram os órgãos que tiveram maior gasto com essas compras?
+
 
 ```{r setup, echo=FALSE, warning=FALSE, message=FALSE}
 library("tidyverse")

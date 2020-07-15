@@ -8,7 +8,8 @@ A base de dados escolhida para o trabalho, disponível nesse
 apresenta os dados de compras e aquisições de materiais, bens e serviços
 pelo Estado de Minas Gerais.
 
-Perguntas:
+Perguntas: 1) Quais foram os órgãos que tiveram maior gasto com essas
+compras?
 
     ## # A tibble: 10 x 27
     ##    id_empenho ano_exercicio sqa_gmifp sqa_credor sqa_natureza sqa_unidade_orc
@@ -23,7 +24,7 @@ Perguntas:
     ##  8   12591677          2020  13659079     856737        41333            2661
     ##  9   12591678          2020  13659079       1300        41469            2667
     ## 10   12592779          2020  13659079      55712        41383            2583
-    ## # … with 21 more variables: sqa_progtrab <dbl>, sqa_unidade_exec <dbl>,
+    ## # ... with 21 more variables: sqa_progtrab <dbl>, sqa_unidade_exec <dbl>,
     ## #   sqa_empenho <dbl>, nr_empenho <dbl>, dt_empenho <date>,
     ## #   unidade_orcamentaria <chr>, unidade_executora <chr>, funcao <chr>,
     ## #   subfuncao <chr>, programa <chr>, acao <chr>, categoria_econ <chr>,
