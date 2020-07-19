@@ -7,7 +7,24 @@ output: github_document
 A base de dados escolhida para o trabalho, disponível nesse [link](http://www.transparencia.dadosabertos.mg.gov.br/dataset/compras-contratos-do-estado-de-minas-gerais), apresenta os dados de compras e aquisições de materiais, bens e serviços pelo Estado de Minas Gerais.
 
 Perguntas:
+
 1) Quais foram os órgãos que tiveram maior gasto com essas compras?
+
+2) Lista dos programas que receberam maior verba e como isso se relaciona com o programa de governo atual.
+
+3) Como foi distribuído o gasto no programa que recebeu maior verba e no que recebeu menor verba.
+
+4) O valor total e média mensal de gastos dos 3 poderes em 2019 e 2020.
+
+5) O valor total e média mensal de gastos das 3 ou 5 unidades executores que tem os maiores gastos.
+
+6) Analisando as compras realizadas em 2019 e 2020, quais foram os bens e serviços que apresentaram os maiores gastos?
+
+7) Qual a evolução dos gastos em compras na área de saúde considerando os anos de 2019 e 2020? 
+
+8) Comparação das despesas correntes e despesas de capital 
+
+9) Evolução comparativa dos gastos das unidades orçamentárias
 
 
 ```{r setup, echo=FALSE, warning=FALSE, message=FALSE}
