@@ -28,7 +28,7 @@ Perguntas:
 
 
 ```{r setup, echo=FALSE, warning=FALSE, message=FALSE}
-library("tidyverse")
+library("tidyverse"); library("lubridate"); library("knitr")
 
 #O código abaixo importa e combina as bases de dados para os anos de 2019 e 2020
 df2020 <- read_csv2("data-raw/dmempenhodesp2020.csv", locale = locale(encoding = "latin1", decimal_mark = ",", date_format = "%d/%m/%Y"))
@@ -36,8 +36,102 @@ df2019 <- read_csv2("data-raw/dmempenhodesp2019.csv", locale = locale(encoding =
 
 df <- bind_rows(df2020, df2019)
 
-head(df, 10)
-
 ```
 
 
+```{r, include = FALSE}
+#Executa os códigos necessários para as perguntas 4 e 5.
+
+#4) O valor total e média mensal de gastos dos 3 poderes em 2019 e 2020.
+
+#primeiramente, vou limpar as células separando numero de identificação e nome, e depois remover do df os órgãos que não pertencem a nenhum dos 3 poderes (MPMG, TCE, Def Pública)
+df4 <- df %>%
+  separate(col = funcao, into = c("id_funcao", "funcao"), sep = " - ", extra = "merge") %>%
+  separate(col = unidade_orcamentaria, into = c("id_unidade", "unidade_orcamentaria"), sep = " - ", extra = "merge") %>%
+  subset(unidade_orcamentaria != "PROCURADORIA GERAL DE JUSTICA") %>%
+  subset(unidade_orcamentaria != "TRIBUNAL DE CONTAS DO ESTADO DE MINAS GERAIS") %>%
+  subset(unidade_orcamentaria != "DEFENSORIA PUBLICA DO ESTADO DE MINAS GERAIS") 
+
+#segundamente, vou criar uma coluna e inserir cada função em um dos 3 poderes, e somar os gastos por poder
+
+df4 <- df4 %>%
+  mutate(Poder = case_when(
+    funcao == "LEGISLATIVA" ~ "Legislativo",
+    funcao == "JUDICIARIA" ~ "Judiciario",
+    funcao != "JUDICIARIA" & funcao != "LEGISLATIVA" ~ "Executivo")) %>%
+  mutate(data = floor_date(as_date(dt_empenho), "month")) %>%
+  group_by(data, Poder) %>%
+  summarise(gasto_mes = sum(vr_empenho), .groups = "keep") %>%
+  mutate(gasto_mes = gasto_mes/1000000)
+
+# Plota o gráfico de linha dos gastos de cada um dos poderes em cada mês
+
+#Cria uma tabela com o gasto total e a média de gasto mensal de cada um dos tres poderes
+totais_poderes <- df4 %>%
+  group_by(Poder) %>%
+  summarise(Gasto_total = sum(gasto_mes)) %>%
+  mutate(Media_mensal = Gasto_total/15) 
+
+
+#5) O valor total e média mensal de gastos das 5 unidades executores que tem os maiores gastos.
+
+df5 <- df %>%
+  separate(col = unidade_executora, into = c("id_unidade", "unidade_executora"), sep = " - ", extra = "merge") %>%
+  mutate(data = floor_date(as_date(dt_empenho), "month")) %>%
+  group_by(unidade_executora) %>%
+  mutate(gasto_total_unidade = sum(vr_empenho))
+
+# O código abaixo cria um dataframe apenas com as 5 unidades executoras com o maior gasto total, calcula a média mensal de gasto delas e formata os nomes das unidades.
+df5 <- df5%>%
+  distinct(unidade_executora, .keep_all = TRUE) %>%
+  subset(select = c(unidade_executora, gasto_total_unidade)) %>%
+  arrange(desc(gasto_total_unidade)) %>%
+  head(5) %>%
+  mutate(media_mensal = gasto_total_unidade/15) %>%
+  mutate(unidade_executora = case_when(
+    unidade_executora == "TJMG - FEPJ" ~ "TJMG",
+    unidade_executora == "C - GABINETE/NAJS" ~ "NAJS",
+    unidade_executora == "DIRETORIA DE MANUTENÃ\u0087Ã\u0083O" ~ "Diretoria de Manutenção - DER",
+    unidade_executora == "C - SUBPAS/SAF (FARMACIA)" ~ "SUBPAS - SAF",
+    unidade_executora == "FUNED" ~ "FUNED"))
+
+```
+
+ 4_ O gráfico abaixo apresenta a evolução mensal dos gastos da totalidade dos órgãos dos poderes Executivo, Legislativo e Judiciário.
+
+
+```{r, echo = FALSE}
+
+df4 %>%
+  group_by(Poder) %>%
+  ggplot(aes(x = data, y = gasto_mes, col = Poder)) +
+  geom_line() +
+  ggtitle("Gasto Mensal dos Três Poderes")
+
+```
+
+  Ao analisar o gráfico e o banco de dados, foi possível perceber, primeiramente, que há uma vacância de dados das compras realizadas pela Assembléia Legislativa de Minas Gerais (ALMG) em 2019. Como esses dados estão ausentes, e sendo a ALMG o único órgão que possui gastos no poder Legislativo, as informações sobre este poder se mostram inconclusivas durante o ano de 2019.
+  
+  Por outro lado, é possível perceber, como já podia se esperar, que os gastos do poder Executivo excedem muito aos gastos dos outros dois poderes. Isso ocorre pelo fato do Poder Executivo ser reponsável pelos gastos com políticas públicas em todas áreas, como segurança, saúde, educação, trasnporte, infraestrutura e etc.
+  
+  Na tabela abaixo podemos verificar o valor total (em milhões de reais) gasto pelos três poderes no período analisado, de janeiro de 2019 até março de 2020, bem como a média mensal dos seus gastos (lembrando que os dados de 2019 dos gastos do poder Legislativo estão ausentes).
+
+```{r, echo=FALSE}
+
+kable(totais_poderes)
+```
+
+
+5_ A tabela abaixo apresenta as cinco unidades executoras que apresentaram os maiores gastos totais durante o período analisado, exibindo os valores dos seus gastos totais e a média mensal, ambos em reais.
+
+```{r, echo = FALSE}
+
+kable(df5)
+
+```
+
+  Apesar do poder Executivo apresentar gastos muito superiores ao do poder Judiciário, a tabela acima traz um órgão do Judiciário como o que mais gasta em compras públicas. Isso occorre pois, ao contrário do Executivo, que possui inúmeros órgãos executando suas políticas públicas, o Judiciário aqui é composto exclusivamente pelo Tribunal de Justiça de Minas Gerais (TJMG). Dessa forma, o TJMG, como único compontente do poder Judiciário, apresenta gastos superiores a qualquer órgão do Executivo (lembrando da ausência dos dados da ALMG nessa análise).
+
+  Em seguida, podemos verificar que os órgãos executores que ocupam da 2ª à 4ª posição pertencem ao poder Executivo, representando os 4 órgãos que mais gastam em compras desse poder. O primeiro deles (2º lugar geral) é o Nucleo de Atendimento À Judicialização da Saúde, enquanto o terceiro (4º lugar geral) é a Subsecretaria de Políticas e Ações de Saúde referente às compras de medicamentos para a população. Esse é um fator importante que destaca como a judicialização da saúde representa um fator muito oneroso para a administração pública do Estado de Minas Gerais, como foi estudado mais a fundo na disciplina de Direito Administrativo. Esse fator se refere às inúmeras ações judiciárias sofridas pelo Estado para o fornecimento de medicamentos para os cidadãos, que não são contemplados pelo SUS. [saiba mais](http://www.mpdft.mp.br/saude/images/judicializacao/Judicializacao_acesso_medicamentos_MG.pdf).
+  
+  Já o 3º lugar geral pertence á diretoria de manutenção do Departamento de Estradas e Rodagem de Minas Gerais, o que é algo esperado pelos gastos elevados em manutenção da infraestrutura viária do Estado. Por último, a Fundação Ezequiel Dias, que visa participar do fortalecimento do Sistema Único de Saúde, protegendo e promovendo a saúde, completando 3 das 4 unidades com maiores gastos do Executivo pertencendo, de alguma forma, ao setor de saúde.
