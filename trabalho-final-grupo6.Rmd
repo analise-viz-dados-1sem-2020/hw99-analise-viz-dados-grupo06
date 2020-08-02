@@ -106,7 +106,9 @@ df4 %>%
   group_by(Poder) %>%
   ggplot(aes(x = data, y = gasto_mes, col = Poder)) +
   geom_line() +
-  ggtitle("Gasto Mensal dos Três Poderes")
+  ggtitle("Gasto Mensal dos Três Poderes") +
+  xlab("Mês") +
+  ylab("Gasto (em milhões de reais)")
 
 ```
 
