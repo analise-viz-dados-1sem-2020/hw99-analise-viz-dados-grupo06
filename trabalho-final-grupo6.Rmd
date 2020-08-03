@@ -11,9 +11,9 @@ A base de dados escolhida para o trabalho, disponível nesse [link](http://www.t
 
 Para a análise da base de dados escolhidas, o grupo buscou responder, com a ajuda da visualização de dados, as seguintes perguntas:
 
-1) Quais foram os órgãos que tiveram maior gasto com essas compras?
-2) Lista dos programas que receberam maior verba e como isso se relaciona com o programa de governo atual.
-3) Como foi distribuído o gasto no programa que recebeu maior verba e no que recebeu menor verba.
+1) Quais foram os funções que receberam maiores verbas?
+2) Quais os programas que receberam maiores verbas?
+3) Como foi distribuído o gasto no programa que recebeu maior verba ?
 4) O valor total e média mensal de gastos dos 3 poderes em 2019 e 2020.
 5) O valor total e média mensal de gastos das 3 ou 5 unidades executores que tem os maiores gastos.
 6) Analisando as compras realizadas em 2019 e 2020, quais foram os bens e serviços que apresentaram os maiores gastos?
@@ -21,6 +21,8 @@ Para a análise da base de dados escolhidas, o grupo buscou responder, com a aju
 8) Comparação das despesas correntes e despesas de capital 
 9) Evolução comparativa dos gastos das unidades orçamentárias
 
+
+## Respostas para as perguntas sobre o banco de dados dos gastos do estado de Minas Gerais
 
 ```{r setup, echo=FALSE, warning=FALSE, message=FALSE}
 library("tidyverse"); library("lubridate"); library("knitr"); library("dplyr")
@@ -30,9 +32,140 @@ df2020 <- read_csv2("data-raw/dmempenhodesp2020.csv", locale = locale(encoding =
 df2019 <- read_csv2("data-raw/dmempenhodesp2019.csv", locale = locale(encoding = "latin1", decimal_mark = ",", date_format = "%d/%m/%Y"))
 
 df <- bind_rows(df2020, df2019)
+dfb <- df
 
 ```
 
+
+
+
+1) Quais foram os funções que receberam maiores verbas?
+
+
+```{r,echo= FALSE, message = FALSE}
+
+## Faz a questão 1
+
+#Filtra pela variáveis necessárias
+dfb <- dfb %>% select(c('unidade_orcamentaria',
+                        'funcao', 
+                        'programa', 
+                        'item_desp', 
+                        'vr_empenho'))
+
+#Filtra os dados que serão usados
+
+df1 <- dfb %>% 
+  group_by(funcao) %>% 
+  summarize(empenhototal = sum(vr_empenho)) %>% 
+  arrange(-empenhototal) %>% 
+  head(5)
+
+#Plota o gráfico
+
+df1%>%
+  slice(1:5) %>% 
+  ggplot(aes(x = reorder(funcao, empenhototal), y=empenhototal, fill=funcao))+
+  geom_bar(stat="identity")+
+  geom_text(aes(label=empenhototal), position=position_dodge(width=0.9), vjust=1)+
+  theme(axis.text.x=element_blank())+
+  theme(axis.ticks.x = element_blank()) +
+  theme(legend.position="bottom", ncol(1))+
+  guides(fill=guide_legend(nrow=5, byrow=TRUE))+
+  scale_fill_discrete(name = "Áreas")+
+  labs(x = "Área", y = "Empenho total", title = "Cinco áreas com as maiores verbas no estado")
+
+```
+
+## Análise dos dados da questão 1
+
+Com a questão um fica claro um padrão que será observado em todo o trabalho: O maior gasto do Estado de Minas Gerais é com a garantia da saúde dos mineiros. Tal característica se dá em virtude, principalmente, dos gastos com medicamentos, como será mostrado a seguir.
+
+As outras áreas com maiores gastos são:
+
+Segurança pública, como se esperado, tendo em vista o plano de governo do Governador Romeu Zema.
+Jurídica, um gasto engessado e pré-determinado para a manutenção da justiça do estado
+Tranporte, essa uma função é um gasto que chama a atenção, em sociedade com tantas mecanismos de comunicação é impensável um gasto de 300 milhões com transporte. Entretanto, analisando os dados é possível afirmar que se trata de todo tipo de transporte,
+por exemplo, ambulâncias. Dessa forma, essa é uma função cabível de uma análise mais aprofundada e que, provavelmente, permitirá ao estado redução de gastos.
+Administração, aqui entra os gastos para manter a máquina pública como um todo funcionando. Também é um função que permite melhores análises e possíveis reduções de gastos.
+
+
+2) Quais os programas que receberam maiores verbas?
+
+```{r, echo=FALSE, message = FALSE}
+
+df2 <- dfb %>% 
+  group_by(programa) %>% 
+  summarize(empenhototal = sum(vr_empenho)) %>% 
+  arrange(-empenhototal)
+
+#Plota o gráfico
+
+df2%>%
+  slice(1:5) %>% 
+  ggplot(aes(x = reorder(programa, empenhototal), y=empenhototal, fill=programa))+
+  geom_bar(stat="identity")+
+  geom_text(aes(label=empenhototal), position=position_dodge(width=0.9), vjust=1)+
+  theme(axis.text.x=element_blank())+
+  theme(axis.ticks.x = element_blank()) +
+  theme(legend.position="bottom", ncol(1))+
+  guides(fill=guide_legend(nrow=5, byrow=TRUE))+
+  scale_fill_discrete(name = "Programa")+
+  labs(x = "Programa", y = "Empenho total", title = "Cinco programas com as maiores verbas no estado")
+
+```
+
+## Análise dos dados da questão 2
+
+Aqui estão os programas do Governo de Minas, em todas as esferas, que mais receberam verbas entre os anos de 2019 e até março de 2020.
+
+Prestação Jurisdicional: basicamente é a necessidade, resguardada por lei, do Estado de oferecer o direito ao cidadão de ter sua defesa em um processo jurídico. Ou seja, aqui são alocados recursos para todas as atividades relacionadas a defesa pública.
+Apoio a administração pública: também relacionada com o funcionamento da máquina pública.
+Gestão do SUS: relacionado com a manutenção da saúde pública no estado.
+Estradas de Minas: programa que tem a função de garantir a manutenção das rodovias mineiras. É interessante analisar que, a despeito do senso comum pensa, são investidos milhões na manutenção das estradas do estado.
+Assistência hospitalar especializada: também relacionada com a manutenção da saúde pública no estado.
+
+3) Como foi distribuído o gasto no programa que recebeu maior verba ?
+
+```{r, echo=FALSE, message = FALSE}
+
+## Faz a questão 3
+
+#Filtra os dados
+
+df3 <- dfb %>% 
+  group_by(programa, item_desp) %>% 
+  summarize(empenhototal = sum(vr_empenho)) %>% 
+  arrange(-empenhototal)
+
+
+df3.1 <- df3 %>% 
+  filter(programa == "180 - GESTAO DO SISTEMA UNICO DE SAUDE") %>% 
+  mutate(empenhototal = empenhototal/1000000)
+
+
+df3.1%>%
+  slice(1:5) %>% 
+  ggplot(aes(x = reorder(item_desp, empenhototal), y=empenhototal, fill=item_desp))+
+  geom_bar(stat="identity")+
+  geom_text(aes(label=empenhototal), position=position_dodge(width=0.9), vjust=1)+
+  theme(axis.text.x=element_blank())+
+  theme(axis.ticks.x = element_blank()) +
+  theme(legend.position="bottom", ncol(1))+
+  guides(fill=guide_legend(nrow=5, byrow=TRUE))+
+  scale_fill_discrete(name = "Item")+
+  labs(x = "Item", y = "Empenho total", title = "Cinco maiores itens da despesa da gestão do SUS")
+
+```
+
+## Análise dos dados da questão 3
+
+Dentre os programas que mais recebem recursos, foi desconsiderado os dois primeiro, em virtude de um ser relacionado com a defensoria pública e o outro ser muito amplo. Dessa forma, foi feita análise com base no programa de gestão do SUS. 
+
+Analisando o gráfico em questão fica evidente os grandes valores gastos com medicamentos, ocupando mais de 95% dos gastos do programa,por parte do estado de minas gerais. Nesse sentido, fica evidente a necessidade de se propor soluções para o barateamento dos medicamentos, como a quebra de patentes e a escolha de medicamentos genéricos.
+
+
+4) O valor total e média mensal de gastos dos 3 poderes em 2019 e 2020.
 
 ```{r, include = FALSE}
 #Executa os códigos necessários para as perguntas 4 e 5.

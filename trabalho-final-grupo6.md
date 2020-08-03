@@ -14,11 +14,9 @@ pelo Estado de Minas Gerais.
 Para a análise da base de dados escolhidas, o grupo buscou responder,
 com a ajuda da visualização de dados, as seguintes perguntas:
 
-1)  Quais foram os órgãos que tiveram maior gasto com essas compras?
-2)  Lista dos programas que receberam maior verba e como isso se
-    relaciona com o programa de governo atual.
-3)  Como foi distribuído o gasto no programa que recebeu maior verba e
-    no que recebeu menor verba.
+1)  Quais foram os funções que receberam maiores verbas?
+2)  Quais os programas que receberam maiores verbas?
+3)  Como foi distribuído o gasto no programa que recebeu maior verba ?
 4)  O valor total e média mensal de gastos dos 3 poderes em 2019 e 2020.
 5)  O valor total e média mensal de gastos das 3 ou 5 unidades
     executores que tem os maiores gastos.
@@ -29,13 +27,81 @@ com a ajuda da visualização de dados, as seguintes perguntas:
 8)  Comparação das despesas correntes e despesas de capital
 9)  Evolução comparativa dos gastos das unidades orçamentárias
 
+## Respostas para as perguntas sobre o banco de dados dos gastos do estado de Minas Gerais
+
+1)  Quais foram os funções que receberam maiores verbas?
+
+![](trabalho-final-grupo6_files/figure-gfm/unnamed-chunk-1-1.png)<!-- -->
+
+## Análise dos dados da questão 1
+
+Com a questão um fica claro um padrão que será observado em todo o
+trabalho: O maior gasto do Estado de Minas Gerais é com a garantia da
+saúde dos mineiros. Tal característica se dá em virtude,
+principalmente, dos gastos com medicamentos, como será mostrado a
+seguir.
+
+As outras áreas com maiores gastos são:
+
+Segurança pública, como se esperado, tendo em vista o plano de governo
+do Governador Romeu Zema. Jurídica, um gasto engessado e pré-determinado
+para a manutenção da justiça do estado Tranporte, essa uma função é um
+gasto que chama a atenção, em sociedade com tantas mecanismos de
+comunicação é impensável um gasto de 300 milhões com transporte.
+Entretanto, analisando os dados é possível afirmar que se trata de todo
+tipo de transporte, por exemplo, ambulâncias. Dessa forma, essa é uma
+função cabível de uma análise mais aprofundada e que, provavelmente,
+permitirá ao estado redução de gastos. Administração, aqui entra os
+gastos para manter a máquina pública como um todo funcionando. Também é
+um função que permite melhores análises e possíveis reduções de gastos.
+
+2)  Quais os programas que receberam maiores verbas?
+
+![](trabalho-final-grupo6_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
+
+## Análise dos dados da questão 2
+
+Aqui estão os programas do Governo de Minas, em todas as esferas, que
+mais receberam verbas entre os anos de 2019 e até março de 2020.
+
+Prestação Jurisdicional: basicamente é a necessidade, resguardada por
+lei, do Estado de oferecer o direito ao cidadão de ter sua defesa em um
+processo jurídico. Ou seja, aqui são alocados recursos para todas as
+atividades relacionadas a defesa pública. Apoio a administração pública:
+também relacionada com o funcionamento da máquina pública. Gestão do
+SUS: relacionado com a manutenção da saúde pública no estado. Estradas
+de Minas: programa que tem a função de garantir a manutenção das
+rodovias mineiras. É interessante analisar que, a despeito do senso
+comum pensa, são investidos milhões na manutenção das estradas do
+estado. Assistência hospitalar especializada: também relacionada com a
+manutenção da saúde pública no estado.
+
+3)  Como foi distribuído o gasto no programa que recebeu maior verba ?
+
+![](trabalho-final-grupo6_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
+
+## Análise dos dados da questão 3
+
+Dentre os programas que mais recebem recursos, foi desconsiderado os
+dois primeiro, em virtude de um ser relacionado com a defensoria pública
+e o outro ser muito amplo. Dessa forma, foi feita análise com base no
+programa de gestão do SUS.
+
+Analisando o gráfico em questão fica evidente os grandes valores gastos
+com medicamentos, ocupando mais de 95% dos gastos do programa,por parte
+do estado de minas gerais. Nesse sentido, fica evidente a necessidade de
+se propor soluções para o barateamento dos medicamentos, como a quebra
+de patentes e a escolha de medicamentos genéricos.
+
+4)  O valor total e média mensal de gastos dos 3 poderes em 2019 e 2020.
+
 ## Análise dos dados
 
 4)  O gráfico abaixo apresenta a evolução mensal dos gastos da
     totalidade dos órgãos dos poderes Executivo, Legislativo e
     Judiciário.
 
-![](trabalho-final-grupo6_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
+![](trabalho-final-grupo6_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
 
 Ao analisar o gráfico e o banco de dados, foi possível perceber,
 primeiramente, que há uma vacância de dados das compras realizadas pela
@@ -119,7 +185,7 @@ ressaltar também que os gastos em **Material médico e hospitalar** e
 **Serviços de produção e logística de medicamentos** tiveram custos
 expressivos no ano de 2019.
 
-![](trabalho-final-grupo6_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
+![](trabalho-final-grupo6_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
 
 Já o gráfico abaixo permite entender o comportamento dos gastos em
 compras de bens e serviços no primeiro trimestre de 2020. O maiores
@@ -127,7 +193,7 @@ gastos estão no grupo de **Execução de obras por contrato de bens não
 patrimoniáveis**, seguido pela **Locação de serviços de apoio
 administrativo** e **Medicamentos**.
 
-![](trabalho-final-grupo6_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
+![](trabalho-final-grupo6_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
 
 7)  Qual a evolução dos gastos em compras na área de saúde considerando
     os anos de 2019 e 2020?
@@ -138,7 +204,7 @@ comportamento praticamente linear durante o período. De acordo com a
 base de dados estudada, o valor total de recursos que o Estado gastou
 nessa categoria em 2019 ficou em torno de 895 milhões de reais.
 
-![](trabalho-final-grupo6_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
+![](trabalho-final-grupo6_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
 
 Analisando o primeiro trimestre de 2020 percebe-se que o Estado gastou
 em torno de R$211 milhões em compras de bens e serviços na área de
@@ -147,12 +213,12 @@ Apesar da base de dados não trazer os dados do segundo trimestre de 2020
 já é possível perceber um possível aumento nos gastos da área de saúde
 provenientes da pandemia.
 
-![](trabalho-final-grupo6_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
+![](trabalho-final-grupo6_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
 
 8)  O gráfico abaixo compara os valores empenhados referentes a despesas
     correntes e despesas de capitais.
 
-![](trabalho-final-grupo6_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
+![](trabalho-final-grupo6_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
 
 A pergunta 8 é respondida pela análise da figura do chamado gráfico de
 pizza. Buscou-se por meio dessa visualização comparar as despesas
@@ -167,7 +233,7 @@ final muito parecido com o esperado inicialmente.
     empenhadas por 12 das unidades orçamentárias no período analisado de
     2019 a 2020 que mais empenharam.
 
-![](trabalho-final-grupo6_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
+![](trabalho-final-grupo6_files/figure-gfm/unnamed-chunk-14-1.png)<!-- -->
 Inicialmente, pensou-se em comparar as despesas das unidades
 orçamentárias por meio do gráfico de área, no qual seria possível
 observar a evolução das despesas a depender do tamanho da área colorida
@@ -188,7 +254,7 @@ evolução de suas despesas ao longo do tempo. As unidades foram
 ordenadas das que mais empenharam no período para as que menos
 empenharam.
 
-![](trabalho-final-grupo6_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
+![](trabalho-final-grupo6_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
 Nota-se pelo primeiro gráfico de faceting que o Fundo Estadual de Saúde
 é o que mais empenhou no período. Contudo, é importante ressaltar que a
 grande maioria dos empenhos são menores que R$1.000.000,00 para todas as
@@ -205,8 +271,8 @@ empenhos ao longo do período, se esses empenhos se deram bem
 distribuídos ao longo do período ou concentrado em uma determinada
 faixa.
 
-![](trabalho-final-grupo6_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
+![](trabalho-final-grupo6_files/figure-gfm/unnamed-chunk-16-1.png)<!-- -->
 
-![](trabalho-final-grupo6_files/figure-gfm/unnamed-chunk-14-1.png)<!-- -->
+![](trabalho-final-grupo6_files/figure-gfm/unnamed-chunk-17-1.png)<!-- -->
 
-![](trabalho-final-grupo6_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
+![](trabalho-final-grupo6_files/figure-gfm/unnamed-chunk-18-1.png)<!-- -->
