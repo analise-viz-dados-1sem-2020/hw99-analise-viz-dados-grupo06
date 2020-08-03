@@ -1,12 +1,12 @@
 ---
 title: "Trabalho final"
-author: "Grupo 6"
-date: "15/07/2020"
+author: "Grupo 6: Eduardo Resende, Gabriel Isrrael, Leandro Saraiva e Matheus Castro"
+date: "03/08/2020"
 output: github_document
 ---
 A base de dados escolhida para o trabalho, disponível nesse [link](http://www.transparencia.dadosabertos.mg.gov.br/dataset/compras-contratos-do-estado-de-minas-gerais), apresenta os dados de compras e aquisições de materiais, bens e serviços pelo Estado de Minas Gerais.
 
-Perguntas:
+Para a análise da base de dados escolhidas, o grupo buscou responder, com a ajuda da visualização de dados, as seguintes perguntas:
 
 1) Quais foram os órgãos que tiveram maior gasto com essas compras?
 
@@ -52,7 +52,7 @@ df4 <- df %>%
   subset(unidade_orcamentaria != "TRIBUNAL DE CONTAS DO ESTADO DE MINAS GERAIS") %>%
   subset(unidade_orcamentaria != "DEFENSORIA PUBLICA DO ESTADO DE MINAS GERAIS") 
 
-#segundamente, vou criar uma coluna e inserir cada função em um dos 3 poderes, e somar os gastos por poder
+#a seguir, vou criar uma coluna e inserir cada função em um dos 3 poderes, e somar os gastos por poder
 
 df4 <- df4 %>%
   mutate(Poder = case_when(
@@ -172,7 +172,7 @@ df6_2019%>%
 Já o gráfico abaixo permite entender o comportamento dos gastos em compras de bens e serviços no primeiro trimestre de 2020. O maiores gastos estão no grupo de **Execução de obras por contrato de bens não patrimoniáveis**, seguido pela **Locação de serviços de apoio administrativo** e **Medicamentos**.
 
 ```{r, echo = FALSE, warning=FALSE, message=FALSE}
-"Cinco maiores gastos em compras de bens e serviços no 1º trimestre de 2020"
+#Cinco maiores gastos em compras de bens e serviços no 1º trimestre de 2020
 
 df6_2020 <- df %>%
   filter(ano_exercicio==2020)%>%

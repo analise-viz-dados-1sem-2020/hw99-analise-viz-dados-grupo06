@@ -1,19 +1,16 @@
----
-output:
-  pdf_document: default
-  html_document: default
----
 Trabalho final
 ================
-Grupo 6
-15/07/2020
+Grupo 6: Eduardo Resende, Gabriel Isrrael, Leandro Saraiva e Matheus
+Castro
+03/08/2020
 
 A base de dados escolhida para o trabalho, disponível nesse
 [link](http://www.transparencia.dadosabertos.mg.gov.br/dataset/compras-contratos-do-estado-de-minas-gerais),
 apresenta os dados de compras e aquisições de materiais, bens e serviços
 pelo Estado de Minas Gerais.
 
-Perguntas:
+Para a análise da base de dados escolhidas, o grupo buscou responder,
+com a ajuda da visualização de dados, as seguintes perguntas:
 
 1)  Quais foram os órgãos que tiveram maior gasto com essas compras?
 
@@ -111,10 +108,54 @@ do Sistema Único de Saúde, protegendo e promovendo a saúde, completando
 3 das 4 unidades com maiores gastos do Executivo pertencendo, de alguma
 forma, ao setor de saúde.
 
+6\_ Analisando as compras realizadas em 2019 e 2020, quais foram os bens
+e serviços que apresentaram os maiores gastos?
+
+Ao analisar o gráfico abaixo percebe-se que os maiores gastos em compras
+de bens em serviços em 2019 foram em **Medicamentos**, **Execução de
+obras por contrato de bens não patrimoniáveis** e **Execução de obras
+por contrato de bens patrimoniáveis**. Estes dois últimos itens estão
+relacionados com as despesas com o pagamento de empreiteiras contratadas
+para execução de obras. Já os gastos com compras de medicamentos tiveram
+um valor de 348,94 milhões para os cofres públicos em 2019. Vale
+ressaltar também que os gastos em **Material médico e hospitalar** e
+**Serviços de produção e logística de medicamentos** tiveram custos
+expressivos no ano de 2019.
+
+![](trabalho-final-grupo6_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
+
+Já o gráfico abaixo permite entender o comportamento dos gastos em
+compras de bens e serviços no primeiro trimestre de 2020. O maiores
+gastos estão no grupo de **Execução de obras por contrato de bens não
+patrimoniáveis**, seguido pela **Locação de serviços de apoio
+administrativo** e **Medicamentos**.
+
+![](trabalho-final-grupo6_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
+
+7\_ Qual a evolução dos gastos em compras na área de saúde considerando
+os anos de 2019 e 2020?
+
+No gráfico seguinte é possível mensurar os gastos que o Estado teve com
+compras de bens em serviços na área de saúde em 2019. É percebido um
+comportamento praticamente linear durante o período. De acordo com a
+base de dados estudada, o valor total de recursos que o Estado gastou
+nessa categoria em 2019 ficou em torno de 895 milhões de reais.
+
+![](trabalho-final-grupo6_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
+
+Analisando o primeiro trimestre de 2020 percebe-se que o Estado gastou
+em torno de R$211 milhões em compras de bens e serviços na área de
+saúde. No mesmo período de 2019 o Estado tinha gastado R$133 milhões.
+Apesar da base de dados não trazer os dados do segundo trimestre de 2020
+já é possível perceber um possível aumento nos gastos da área de saúde
+provenientes da pandemia.
+
+![](trabalho-final-grupo6_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
+
 8)  O gráfico abaixo compara os valores empenhados referentes a despesas
     correntes e despesas de capitais.
 
-![](trabalho-final-grupo6_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
+![](trabalho-final-grupo6_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
 
 A pergunta 8 é respondida pela análise da figura do chamado gráfico de
 pizza. Buscou-se por meio dessa visualização comparar as despesas
@@ -129,7 +170,7 @@ final muito parecido com o esperado inicialmente.
     empenhadas por 12 das unidades orçamentárias no período analisado de
     2019 a 2020 que mais empenharam.
 
-![](trabalho-final-grupo6_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
+![](trabalho-final-grupo6_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
 Inicialmente, pensou-se em comparar as despesas das unidades
 orçamentárias por meio do gráfico de área, no qual seria possível
 observar a evolução das despesas a depender do tamanho da área colorida
@@ -150,7 +191,7 @@ evolução de suas despesas ao longo do tempo. As unidades foram
 ordenadas das que mais empenharam no período para as que menos
 empenharam.
 
-![](trabalho-final-grupo6_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
+![](trabalho-final-grupo6_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
 Nota-se pelo primeiro gráfico de faceting que o Fundo Estadual de Saúde
 é o que mais empenhou no período. Contudo, é importante ressaltar que a
 grande maioria dos empenhos são menores que R$1.000.000,00 para todas as
@@ -167,8 +208,8 @@ empenhos ao longo do período, se esses empenhos se deram bem
 distribuídos ao longo do período ou concentrado em uma determinada
 faixa.
 
-![](trabalho-final-grupo6_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
+![](trabalho-final-grupo6_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
 
-![](trabalho-final-grupo6_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
+![](trabalho-final-grupo6_files/figure-gfm/unnamed-chunk-14-1.png)<!-- -->
 
-![](trabalho-final-grupo6_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
+![](trabalho-final-grupo6_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
