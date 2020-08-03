@@ -4,6 +4,8 @@ Grupo 6: Eduardo Resende, Gabriel Isrrael, Leandro Saraiva e Matheus
 Castro
 03/08/2020
 
+## Introdução
+
 A base de dados escolhida para o trabalho, disponível nesse
 [link](http://www.transparencia.dadosabertos.mg.gov.br/dataset/compras-contratos-do-estado-de-minas-gerais),
 apresenta os dados de compras e aquisições de materiais, bens e serviços
@@ -13,30 +15,25 @@ Para a análise da base de dados escolhidas, o grupo buscou responder,
 com a ajuda da visualização de dados, as seguintes perguntas:
 
 1)  Quais foram os órgãos que tiveram maior gasto com essas compras?
-
 2)  Lista dos programas que receberam maior verba e como isso se
     relaciona com o programa de governo atual.
-
 3)  Como foi distribuído o gasto no programa que recebeu maior verba e
     no que recebeu menor verba.
-
 4)  O valor total e média mensal de gastos dos 3 poderes em 2019 e 2020.
-
 5)  O valor total e média mensal de gastos das 3 ou 5 unidades
     executores que tem os maiores gastos.
-
 6)  Analisando as compras realizadas em 2019 e 2020, quais foram os bens
     e serviços que apresentaram os maiores gastos?
-
 7)  Qual a evolução dos gastos em compras na área de saúde considerando
     os anos de 2019 e 2020?
-
 8)  Comparação das despesas correntes e despesas de capital
-
 9)  Evolução comparativa dos gastos das unidades orçamentárias
 
-4\_ O gráfico abaixo apresenta a evolução mensal dos gastos da
-totalidade dos órgãos dos poderes Executivo, Legislativo e Judiciário.
+## Análise dos dados
+
+4)  O gráfico abaixo apresenta a evolução mensal dos gastos da
+    totalidade dos órgãos dos poderes Executivo, Legislativo e
+    Judiciário.
 
 ![](trabalho-final-grupo6_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
 
@@ -64,10 +61,10 @@ dados de 2019 dos gastos do poder Legislativo estão ausentes).
 | Judiciario  |    336.04589 |     22.403059 |
 | Legislativo |     38.84253 |      2.589502 |
 
-5\_ A tabela abaixo apresenta as cinco unidades executoras que
-apresentaram os maiores gastos totais durante o período analisado,
-exibindo os valores dos seus gastos totais e a média mensal, ambos em
-reais.
+5)  A tabela abaixo apresenta as cinco unidades executoras que
+    apresentaram os maiores gastos totais durante o período analisado,
+    exibindo os valores dos seus gastos totais e a média mensal, ambos
+    em reais.
 
 | unidade\_executora            | gasto\_total\_unidade | media\_mensal |
 | :---------------------------- | --------------------: | ------------: |
@@ -108,8 +105,8 @@ do Sistema Único de Saúde, protegendo e promovendo a saúde, completando
 3 das 4 unidades com maiores gastos do Executivo pertencendo, de alguma
 forma, ao setor de saúde.
 
-6\_ Analisando as compras realizadas em 2019 e 2020, quais foram os bens
-e serviços que apresentaram os maiores gastos?
+6)  Analisando as compras realizadas em 2019 e 2020, quais foram os bens
+    e serviços que apresentaram os maiores gastos?
 
 Ao analisar o gráfico abaixo percebe-se que os maiores gastos em compras
 de bens em serviços em 2019 foram em **Medicamentos**, **Execução de
@@ -132,8 +129,8 @@ administrativo** e **Medicamentos**.
 
 ![](trabalho-final-grupo6_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
 
-7\_ Qual a evolução dos gastos em compras na área de saúde considerando
-os anos de 2019 e 2020?
+7)  Qual a evolução dos gastos em compras na área de saúde considerando
+    os anos de 2019 e 2020?
 
 No gráfico seguinte é possível mensurar os gastos que o Estado teve com
 compras de bens em serviços na área de saúde em 2019. É percebido um
