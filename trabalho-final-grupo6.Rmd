@@ -139,6 +139,99 @@ kable(df5)
   
   Já o 3º lugar geral pertence á diretoria de manutenção do Departamento de Estradas e Rodagem de Minas Gerais, o que é algo esperado pelos gastos elevados em manutenção da infraestrutura viária do Estado. Por último, a Fundação Ezequiel Dias, que visa participar do fortalecimento do Sistema Único de Saúde, protegendo e promovendo a saúde, completando 3 das 4 unidades com maiores gastos do Executivo pertencendo, de alguma forma, ao setor de saúde.
   
+
+
+
+6_ Analisando as compras realizadas em 2019 e 2020, quais foram os bens e serviços que apresentaram os maiores gastos?
+
+Ao analisar o gráfico abaixo percebe-se que os maiores gastos em compras de bens em serviços em 2019 foram em **Medicamentos**, **Execução de obras por contrato de bens não patrimoniáveis** e **Execução de obras por contrato de bens patrimoniáveis**. Estes dois últimos itens estão relacionados com as despesas com o pagamento de empreiteiras contratadas para execução de obras. Já os gastos com compras de medicamentos tiveram um valor de 348,94 milhões para os cofres públicos em 2019. Vale ressaltar também que os gastos em **Material médico e hospitalar** e  **Serviços de produção e logística de medicamentos** tiveram custos expressivos no ano de 2019.
+
+
+```{r, echo = FALSE, warning=FALSE, message=FALSE}
+#plota o gráfico "Cinco maiores gastos em compras de bens e serviços em 2019"
+
+df6_2019 <- df %>%
+  filter(ano_exercicio==2019)%>%
+  group_by(item_desp)%>%
+  summarise(total_empenho = round(sum(vr_empenho)/1000000,2))%>%
+  arrange(desc(total_empenho))%>%
+  head(5)
+
+df6_2019%>%
+  ggplot(aes(x = reorder(item_desp, -total_empenho), y=total_empenho, fill=item_desp))+
+  geom_bar(stat="identity")+
+  geom_text(aes(label=total_empenho), position=position_dodge(width=0.9), vjust=1)+
+  theme(axis.text.x=element_blank())+
+  theme(axis.ticks.x = element_blank()) +
+  theme(legend.position="bottom", ncol(1))+
+  guides(fill=guide_legend(nrow=5, byrow=TRUE))+
+  scale_fill_discrete(name = "Item")+
+  labs(x = "Item", y = "Valor (em milhões)", title = "Cinco maiores gastos em compras de bens e serviços em 2019")
+```
+
+Já o gráfico abaixo permite entender o comportamento dos gastos em compras de bens e serviços no primeiro trimestre de 2020. O maiores gastos estão no grupo de **Execução de obras por contrato de bens não patrimoniáveis**, seguido pela **Locação de serviços de apoio administrativo** e **Medicamentos**.
+
+```{r, echo = FALSE, warning=FALSE, message=FALSE}
+"Cinco maiores gastos em compras de bens e serviços no 1º trimestre de 2020"
+
+df6_2020 <- df %>%
+  filter(ano_exercicio==2020)%>%
+  group_by(item_desp)%>%
+  summarise(total_empenho = round(sum(vr_empenho)/1000000,2))%>%
+  arrange(desc(total_empenho))%>%
+  head(5)
+
+df6_2020 %>%
+  ggplot(aes(x = reorder(item_desp, -total_empenho), y=total_empenho, fill=item_desp))+
+  geom_bar(stat="identity")+
+  geom_text(aes(label=total_empenho), position=position_dodge(width=0.9), vjust=1)+
+  theme(axis.text.x=element_blank())+
+  theme(axis.ticks.x = element_blank()) +
+  theme(legend.position="bottom", ncol(1))+
+  guides(fill=guide_legend(nrow=5, byrow=TRUE))+
+  scale_fill_discrete(name = "Item")+
+  labs(x = "Item", y = "Valor (em milhões)", title = "Cinco maiores gastos em compras de bens e serviços no 1º trimestre de 2020")
+```
+
+7_ Qual a evolução dos gastos em compras na área de saúde considerando os anos de 2019 e 2020? 
+
+No gráfico seguinte é possível mensurar os gastos que o Estado teve com compras de bens em serviços na área de saúde em 2019. É percebido um comportamento praticamente linear durante o período. De acordo com a base de dados estudada, o valor total de recursos que o Estado gastou nessa categoria em 2019 ficou em torno de 895 milhões de reais.
+
+```{r, echo = FALSE, warning=FALSE, message=FALSE}
+#plota o gráfico "Evolução dos gastos em compras na área de saúde em 2019"
+
+df7_2019 <- df %>%
+  filter (funcao=="10 - SAUDE", ano_exercicio==2019)%>%
+  arrange(dt_empenho)%>%
+  mutate(soma_vrempenho=cumsum(vr_empenho))%>%
+  mutate(soma_vrempenho=(round(soma_vrempenho/1000000,2)))
+
+df7_2019 %>%
+  ggplot(aes(x = dt_empenho, y=soma_vrempenho))+
+  geom_line(color="red", size=1)+
+  labs(x = "Mês", y = "Valor (em milhões)", title = "Evolução dos gastos em compras na área de saúde em 2019")
+```
+
+Analisando o primeiro trimestre de 2020 percebe-se que o Estado gastou em torno de R$211 milhões em compras de bens e serviços na área de saúde. No mesmo período de 2019 o Estado tinha gastado R$133 milhões. Apesar da base de dados não trazer os dados do segundo trimestre de 2020 já é possível perceber um possível aumento nos gastos da área de saúde provenientes da pandemia.
+
+```{r, echo = FALSE, warning=FALSE, message=FALSE}
+#plota o gráfico "Evolução dos gastos em compras na área de saúde no 1º trimestre de 2020"
+
+df7_2020 <- df %>%
+  filter (funcao=="10 - SAUDE", ano_exercicio==2020)%>%
+  arrange(dt_empenho)%>%
+  mutate(soma_vrempenho=cumsum(vr_empenho))%>%
+  mutate(soma_vrempenho=(round(soma_vrempenho/1000000,2)))
+
+df7_2020 %>%
+  ggplot(aes(x = dt_empenho, y=soma_vrempenho))+
+  geom_line(color="blue", size=1)+
+  labs(x = "Data", y = "Valor (em milhões)", title = "Evolução dos gastos em compras na área de saúde no 1º trimestre de 2020")
+  
+```
+
+
+
 ```{r, include = FALSE, warning=FALSE, message=FALSE}
 library(tidyverse)
 library(dplyr)
