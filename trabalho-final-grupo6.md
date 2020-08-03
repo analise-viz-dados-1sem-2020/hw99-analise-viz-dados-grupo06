@@ -38,9 +38,8 @@ Perguntas:
 
 9)  Evolução comparativa dos gastos das unidades orçamentárias
 
-10) O gráfico abaixo apresenta a evolução mensal dos gastos da
-    totalidade dos órgãos dos poderes Executivo, Legislativo e
-    Judiciário.
+4\_ O gráfico abaixo apresenta a evolução mensal dos gastos da
+totalidade dos órgãos dos poderes Executivo, Legislativo e Judiciário.
 
 ![](trabalho-final-grupo6_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
 
@@ -68,10 +67,10 @@ dados de 2019 dos gastos do poder Legislativo estão ausentes).
 | Judiciario  |    336.04589 |     22.403059 |
 | Legislativo |     38.84253 |      2.589502 |
 
-5)  A tabela abaixo apresenta as cinco unidades executoras que
-    apresentaram os maiores gastos totais durante o período analisado,
-    exibindo os valores dos seus gastos totais e a média mensal, ambos
-    em reais.
+5\_ A tabela abaixo apresenta as cinco unidades executoras que
+apresentaram os maiores gastos totais durante o período analisado,
+exibindo os valores dos seus gastos totais e a média mensal, ambos em
+reais.
 
 | unidade\_executora            | gasto\_total\_unidade | media\_mensal |
 | :---------------------------- | --------------------: | ------------: |

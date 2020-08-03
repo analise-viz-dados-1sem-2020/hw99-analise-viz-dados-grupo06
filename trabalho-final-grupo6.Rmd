@@ -97,7 +97,8 @@ df5 <- df5%>%
 
 ```
 
- 4) O gráfico abaixo apresenta a evolução mensal dos gastos da totalidade dos órgãos dos poderes Executivo, Legislativo e Judiciário.
+
+4_ O gráfico abaixo apresenta a evolução mensal dos gastos da totalidade dos órgãos dos poderes Executivo, Legislativo e Judiciário.
 
 
 ```{r, echo = FALSE}
@@ -124,7 +125,7 @@ kable(totais_poderes)
 ```
 
 
-5) A tabela abaixo apresenta as cinco unidades executoras que apresentaram os maiores gastos totais durante o período analisado, exibindo os valores dos seus gastos totais e a média mensal, ambos em reais.
+5_ A tabela abaixo apresenta as cinco unidades executoras que apresentaram os maiores gastos totais durante o período analisado, exibindo os valores dos seus gastos totais e a média mensal, ambos em reais.
 
 ```{r, echo = FALSE}
 
