@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 Trabalho final
 ================
 Grupo 6
@@ -33,8 +38,9 @@ Perguntas:
 
 9)  Evolução comparativa dos gastos das unidades orçamentárias
 
-4\_ O gráfico abaixo apresenta a evolução mensal dos gastos da
-totalidade dos órgãos dos poderes Executivo, Legislativo e Judiciário.
+10) O gráfico abaixo apresenta a evolução mensal dos gastos da
+    totalidade dos órgãos dos poderes Executivo, Legislativo e
+    Judiciário.
 
 ![](trabalho-final-grupo6_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
 
@@ -62,10 +68,10 @@ dados de 2019 dos gastos do poder Legislativo estão ausentes).
 | Judiciario  |    336.04589 |     22.403059 |
 | Legislativo |     38.84253 |      2.589502 |
 
-5\_ A tabela abaixo apresenta as cinco unidades executoras que
-apresentaram os maiores gastos totais durante o período analisado,
-exibindo os valores dos seus gastos totais e a média mensal, ambos em
-reais.
+5)  A tabela abaixo apresenta as cinco unidades executoras que
+    apresentaram os maiores gastos totais durante o período analisado,
+    exibindo os valores dos seus gastos totais e a média mensal, ambos
+    em reais.
 
 | unidade\_executora            | gasto\_total\_unidade | media\_mensal |
 | :---------------------------- | --------------------: | ------------: |
@@ -105,3 +111,65 @@ gastos elevados em manutenção da infraestrutura viária do Estado. Por
 do Sistema Único de Saúde, protegendo e promovendo a saúde, completando
 3 das 4 unidades com maiores gastos do Executivo pertencendo, de alguma
 forma, ao setor de saúde.
+
+8)  O gráfico abaixo compara os valores empenhados referentes a despesas
+    correntes e despesas de capitais.
+
+![](trabalho-final-grupo6_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
+
+A pergunta 8 é respondida pela análise da figura do chamado gráfico de
+pizza. Buscou-se por meio dessa visualização comparar as despesas
+correntes e as despesas de capital, confrontando-as por meio da
+visualização em faixas no gráfico. Nota-se que as despesas correntes são
+bem superiores as despesas de capital, o que era de se esperar tendo em
+vista a natureza e utilização de cada uma. Não houve dificuldades no
+tratamento dos dados nem surpresas na visualização, sendo o resultado
+final muito parecido com o esperado inicialmente.
+
+9)  O gráfico de linha abaixo apresenta a comparação das despesas
+    empenhadas por 12 das unidades orçamentárias no período analisado de
+    2019 a 2020 que mais empenharam.
+
+![](trabalho-final-grupo6_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
+Inicialmente, pensou-se em comparar as despesas das unidades
+orçamentárias por meio do gráfico de área, no qual seria possível
+observar a evolução das despesas a depender do tamanho da área colorida
+daquela unidade. Contudo, diversos problemas surgiram com essa
+visualização. A primeira delas é a enorme quantidade de unidades, o que
+tornou a visualização muito confusa. Em segundo lugar, o fato das
+despesas não serem continuas, ou seja, as unidades orçamentárias não
+empenham despesas todos os dias. Por fim, os valores são muito distintos
+uns dos outros, tendo valores de pouco reais e outros valores na
+proporção de milhões de reais. Tudo isso distorceu o gráfico e o
+tornou inviável.
+
+Nesse sentido, para resolver o problema, filtrou-se as unidades
+orçamentárias pelas 12 que mais empenharam ao longo do período
+2019/2020 analisado. Ademais, utilizou-se a visualização por pontos e o
+faceting (facet\_wrap) para separar as unidades e poder comparar a
+evolução de suas despesas ao longo do tempo. As unidades foram
+ordenadas das que mais empenharam no período para as que menos
+empenharam.
+
+![](trabalho-final-grupo6_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
+Nota-se pelo primeiro gráfico de faceting que o Fundo Estadual de Saúde
+é o que mais empenhou no período. Contudo, é importante ressaltar que a
+grande maioria dos empenhos são menores que R$1.000.000,00 para todas as
+unidades, mas esse fundo em especial possui uma maior quantidade de
+empenhos acima desse valor, o que corrobora para ser o que mais empenhou
+no período.
+
+Dessa forma, para melhor visualizar os gastos, foi-se limitando o valor
+máximo do empenho no eixo das ordenadas do gráfico. Dessa forma, fez-se
+limitações de até R$1.000.000,00, até R$125.000,00 e até R$40.000,00.
+Por meio dessa limitação, foi possível avaliar melhor a quantidade de
+empenhos de cada unidade, verificar qual possui uma maior densidade de
+empenhos ao longo do período, se esses empenhos se deram bem
+distribuídos ao longo do período ou concentrado em uma determinada
+faixa.
+
+![](trabalho-final-grupo6_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
+
+![](trabalho-final-grupo6_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
+
+![](trabalho-final-grupo6_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->

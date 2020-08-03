@@ -28,7 +28,7 @@ Perguntas:
 
 
 ```{r setup, echo=FALSE, warning=FALSE, message=FALSE}
-library("tidyverse"); library("lubridate"); library("knitr")
+library("tidyverse"); library("lubridate"); library("knitr"); library("dplyr")
 
 #O código abaixo importa e combina as bases de dados para os anos de 2019 e 2020
 df2020 <- read_csv2("data-raw/dmempenhodesp2020.csv", locale = locale(encoding = "latin1", decimal_mark = ",", date_format = "%d/%m/%Y"))
@@ -97,7 +97,7 @@ df5 <- df5%>%
 
 ```
 
- 4_ O gráfico abaixo apresenta a evolução mensal dos gastos da totalidade dos órgãos dos poderes Executivo, Legislativo e Judiciário.
+ 4) O gráfico abaixo apresenta a evolução mensal dos gastos da totalidade dos órgãos dos poderes Executivo, Legislativo e Judiciário.
 
 
 ```{r, echo = FALSE}
@@ -124,7 +124,7 @@ kable(totais_poderes)
 ```
 
 
-5_ A tabela abaixo apresenta as cinco unidades executoras que apresentaram os maiores gastos totais durante o período analisado, exibindo os valores dos seus gastos totais e a média mensal, ambos em reais.
+5) A tabela abaixo apresenta as cinco unidades executoras que apresentaram os maiores gastos totais durante o período analisado, exibindo os valores dos seus gastos totais e a média mensal, ambos em reais.
 
 ```{r, echo = FALSE}
 
@@ -137,3 +137,148 @@ kable(df5)
   Em seguida, podemos verificar que os órgãos executores que ocupam da 2ª à 4ª posição pertencem ao poder Executivo, representando os 4 órgãos que mais gastam em compras desse poder. O primeiro deles (2º lugar geral) é o Nucleo de Atendimento À Judicialização da Saúde, enquanto o terceiro (4º lugar geral) é a Subsecretaria de Políticas e Ações de Saúde referente às compras de medicamentos para a população. Esse é um fator importante que destaca como a judicialização da saúde representa um fator muito oneroso para a administração pública do Estado de Minas Gerais, como foi estudado mais a fundo na disciplina de Direito Administrativo. Esse fator se refere às inúmeras ações judiciárias sofridas pelo Estado para o fornecimento de medicamentos para os cidadãos, que não são contemplados pelo SUS. [saiba mais](http://www.mpdft.mp.br/saude/images/judicializacao/Judicializacao_acesso_medicamentos_MG.pdf).
   
   Já o 3º lugar geral pertence á diretoria de manutenção do Departamento de Estradas e Rodagem de Minas Gerais, o que é algo esperado pelos gastos elevados em manutenção da infraestrutura viária do Estado. Por último, a Fundação Ezequiel Dias, que visa participar do fortalecimento do Sistema Único de Saúde, protegendo e promovendo a saúde, completando 3 das 4 unidades com maiores gastos do Executivo pertencendo, de alguma forma, ao setor de saúde.
+  
+```{r, include = FALSE, warning=FALSE, message=FALSE}
+library(tidyverse)
+library(dplyr)
+# Cria dataframe para utilizar na análise 8
+
+df8 <- df
+
+# Manipula df8 e deixa somente as variáveis de interesse e a soma dos valores de empenho
+
+pie_chart <- aggregate(x = df8$vr_empenho,
+          by= list(df8$categoria_econ),
+          FUN=sum)
+
+# Renomeia os nomes das colunas do dataframe que será utilizado para o gráfico de pizza e
+# trata os dados para melhor visualização na plotagem final (visualização por milhão e arredondamento com 2 casas decimais)
+
+colnames(pie_chart) <- c("Categoria de Despesa", "Valor Empenhado")
+pie_chart[1,1] = "DESPESAS CORRENTES"
+pie_chart[2,1] = "DESPESAS DE CAPITAL"
+pie_chart[1,2] = pie_chart[1,2]/1000000
+pie_chart[2,2] = pie_chart[2,2]/1000000
+pie_chart[,-1] <- round(pie_chart[,-1],2)
+
+
+
+# Cria dataframe para utilizar na questão 9
+  
+df9 <- df
+colnames(df9) <- c("id_empenho", "ano_exercicio", "sqa_gmifp", "sqa_credor", "sqa_natureza", "sqa_unidade_orc", "sqa_progtrab", "sqa_unidade_exerc", "sqa_empenho", "nr_empenho", "dt_empenho", "Unidade Orçamentária", "unidade_executora", "funcao", "subfuncao", "progama", "acao", "categoria_econ", "grupo_desp", "elemento_desp", "item_desp", "modalidade_aplic", "tipo_empenho", "fonte_recurso", "identificador_orc", "razao_social_credor", "Valor Empenhado")
+
+# Cria uma lista com as 6 maiores unidades orçamentárias
+
+df9_maiores <- aggregate(x = df9$`Valor Empenhado`, by= list(df9$`Unidade Orçamentária`), FUN=sum)
+
+colnames(df9_maiores) <- c("Unidade Orçamentária", "Valor Empenhado")
+
+df9_maiores <- df9_maiores[order(-df9_maiores$`Valor Empenhado`),]
+
+maiores <- df9_maiores$`Unidade Orçamentária`[1:12]
+
+maiores
+
+# Ordena em ordem decrescente as Unidades Orçamentárias para a plotagem no facet_wrap
+
+df9$`Unidade Orçamentária` <- factor(df9$`Unidade Orçamentária`, levels = maiores)
+
+```
+
+8) O gráfico abaixo compara os valores empenhados referentes a despesas correntes e despesas de capitais.
+
+```{r, echo = FALSE, warning=FALSE, message=FALSE}
+# Cria e salva o gráfico de pizza a partir de manipulação de um gráfico de barras
+
+pie_chart %>% 
+  ggplot(aes(x= "", y = `Valor Empenhado`, fill = `Categoria de Despesa`, label=sprintf("%0.2f", round(`Valor Empenhado`, digits = 2)))) +
+  geom_bar(stat="identity", width=1) +
+  geom_text(aes(label = `Valor Empenhado`, 1), position = position_stack(vjust = 0.5)) +
+  theme(plot.title = element_text(hjust=0.5),
+        axis.line = element_blank(),
+        axis.text = element_blank(),
+        axis.ticks = element_blank()) +
+  coord_polar("y", start=0) +
+  xlab("") +
+  ylab("Valor Empenhado [R$ - Milhões]")
+
+```
+
+  A pergunta 8 é respondida pela análise da figura do chamado gráfico de pizza. Buscou-se por meio dessa visualização comparar as despesas correntes e as despesas de capital, confrontando-as por meio da visualização em faixas no gráfico. Nota-se que as despesas correntes são bem superiores as despesas de capital, o que era de se esperar tendo em vista a natureza e utilização de cada uma. Não houve dificuldades no tratamento dos dados nem surpresas na visualização, sendo o resultado final muito parecido com o esperado inicialmente.
+
+
+9) O gráfico de linha abaixo apresenta a comparação das despesas empenhadas por 12 das unidades orçamentárias no período analisado de 2019 a 2020 que mais empenharam.
+
+```{r, echo = FALSE, warning=FALSE, message=FALSE, fig.width=22, fig.height=7}
+# Plota o gráfico de área pretendido inicialmente para as 12 maiores unidades orçamentárias
+
+df9 %>% 
+  filter(`Unidade Orçamentária` == maiores) %>% 
+  ggplot(aes(x = dt_empenho, y = `Valor Empenhado`, fill = `Unidade Orçamentária`))+
+  geom_area()
+
+```
+  Inicialmente, pensou-se em comparar as despesas das unidades orçamentárias por meio do gráfico de área, no qual seria possível observar a evolução das despesas a depender do tamanho da área colorida daquela unidade. Contudo, diversos problemas surgiram com essa visualização. A primeira delas é a enorme quantidade de unidades, o que tornou a visualização muito confusa. Em segundo lugar, o fato das despesas não serem continuas, ou seja, as unidades orçamentárias não empenham despesas todos os dias. Por fim, os valores são muito distintos uns dos outros, tendo valores de pouco reais e outros valores na proporção de milhões de reais. Tudo isso distorceu o gráfico e o tornou inviável.
+  
+  Nesse sentido, para resolver o problema, filtrou-se as unidades orçamentárias pelas 12 que mais empenharam ao longo do período 2019/2020 analisado. Ademais, utilizou-se a visualização por pontos e o faceting (facet_wrap) para separar as unidades e poder comparar a evolução de suas despesas ao longo do tempo. As unidades foram ordenadas das que mais empenharam no período para as que menos empenharam.
+  
+```{r, echo = FALSE, warning=FALSE, message=FALSE, fig.width=22, fig.height=14}
+# Plota o gráfico de pontos com facet_wrap para melhor visualização das unidades até 9 milhões empenhados
+  
+df9 %>% 
+  filter(`Unidade Orçamentária` == maiores) %>% 
+  ggplot(aes(x = dt_empenho, y = `Valor Empenhado`, fill = `Unidade Orçamentária`, colour = `Unidade Orçamentária`)) +
+  geom_point() +
+  facet_wrap(~`Unidade Orçamentária`) +
+  xlab('Data') +
+  ylab('Valor empenhado [R$]') +
+  ggtitle("Valores Empenhados até R$9 milhões")
+
+```
+  Nota-se pelo primeiro gráfico de faceting que o Fundo Estadual de Saúde é o que mais empenhou no período. Contudo, é importante ressaltar que a grande maioria dos empenhos são menores que R$1.000.000,00 para todas as unidades, mas esse fundo em especial possui uma maior quantidade de empenhos acima desse valor, o que corrobora para ser o que mais empenhou no período.
+  
+  Dessa forma, para melhor visualizar os gastos, foi-se limitando o valor máximo do empenho no eixo das ordenadas do gráfico. Dessa forma, fez-se limitações de até R$1.000.000,00, até R$125.000,00 e até R$40.000,00. Por meio dessa limitação, foi possível avaliar melhor a quantidade de empenhos de cada unidade, verificar qual possui uma maior densidade de empenhos ao longo do período, se esses empenhos se deram bem distribuídos ao longo do período ou concentrado em uma determinada faixa.
+
+```{r, echo = FALSE, warning=FALSE, message=FALSE, fig.width=22, fig.height=14}
+# Plota o gráfico de pontos com facet_wrap para melhor visualização das unidades até 1 milhão empenhado
+
+df9 %>% 
+  filter(`Unidade Orçamentária` == maiores) %>% 
+  ggplot(aes(x = dt_empenho, y = `Valor Empenhado`, fill = `Unidade Orçamentária`, colour = `Unidade Orçamentária`)) +
+  geom_point() +
+  facet_wrap(~`Unidade Orçamentária`) +
+  xlab('Data') +
+  ylab('Valor empenhado [R$]') +
+  ggtitle("Valores Empenhados até R$1 milhão") +
+  ylim(0, 1000000)
+```
+
+```{r, echo = FALSE, warning=FALSE, message=FALSE, fig.width=22, fig.height=14}
+# Plota o gráfico de pontos com facet_wrap para melhor visualização das unidades até R$125.000,00 empenhado
+  
+df9 %>% 
+  filter(`Unidade Orçamentária` == maiores) %>% 
+  ggplot(aes(x = dt_empenho, y = `Valor Empenhado`, fill = `Unidade Orçamentária`, colour = `Unidade Orçamentária`)) +
+  geom_point() +
+  facet_wrap(~`Unidade Orçamentária`) +
+  xlab('Data') +
+  ylab('Valor empenhado [R$]') +
+  ggtitle("Valores Empenhados até R$125.000,00") +
+  ylim(0, 125000)
+```
+
+```{r, echo = FALSE, warning=FALSE, message=FALSE, fig.width=22, fig.height=14}
+# Plota o gráfico de pontos com facet_wrap para melhor visualização das unidades até R$40.000,00 empenhado
+
+df9 %>% 
+  filter(`Unidade Orçamentária` == maiores) %>% 
+  ggplot(aes(x = dt_empenho, y = `Valor Empenhado`, fill = `Unidade Orçamentária`, colour = `Unidade Orçamentária`)) +
+  geom_point() +
+  facet_wrap(~`Unidade Orçamentária`) +
+  xlab('Data') +
+  ylab('Valor empenhado [R$]') +
+  ggtitle("Valores Empenhados até R$40.000,00") +
+  ylim(0, 40000)
+
+```
